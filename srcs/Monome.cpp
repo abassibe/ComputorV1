@@ -6,12 +6,12 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 16:16:12 by abassibe          #+#    #+#             */
-/*   Updated: 2019/03/05 18:00:32 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/03/07 17:14:08 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Monome.hpp"
+#include "../includes/Monome.hpp"
 
 Monome::Monome()
 {}

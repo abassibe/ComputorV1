@@ -6,11 +6,11 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 17:46:29 by abassibe          #+#    #+#             */
-/*   Updated: 2019/03/06 19:05:52 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/03/07 17:14:21 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Poly.hpp"
+#include "../includes/Poly.hpp"
 #include <iostream>
 #include <vector>
 
@@ -160,29 +160,31 @@ void	Poly::deltaSupZero()
 void	Poly::deltaInfZero()
 {
 	float	b = 0.0;
-	switch (equationList.size())
-	{
-		case 2:
-			b = equationList[0]->exp;
-		case 3:
-			b = equationList[1]->exp;
-	}
+	b = equationList[1]->coef;
 	RC1 = (b * -1) / 2;
 	delta = squareRoot(delta * -1) / 2;
 }
 
 bool	Poly::isValid()
 {
-	if (equationList.size() < resultList.size())
+	for (int i = resultList.size() - 1; i >= 0; i--)
 	{
-		std::cout << "Invalid equation.\n";
-		exit(0);
+		if (resultList[i]->coef != 0)
+			break;
+		resultList.pop_back();
 	}
 	return (true);
 }
 
 void	Poly::printReducedForm()
 {
+	while (resultList.size() > equationList.size())
+	{
+		equationList.push_back(resultList.back());
+		resultList.pop_back();
+	}
+	for (size_t i = 0; i < resultList.size(); i++)
+		equationList[i]->coef -= resultList[i]->coef;
 	for (size_t i = 0; i < equationList.size(); i++)
 	{
 		if (equationList[0]->coef != 0)
@@ -197,6 +199,8 @@ void	Poly::printReducedForm()
 	std::cout << equationList[0]->coef << " * X^" << equationList[0]->exp;
 	for (size_t i = 1; i < equationList.size(); i++)
 	{
+		if (equationList[i]->coef == 0)
+			continue ;
 		if (equationList[i]->coef < 0)
 			std::cout << " - " << (equationList[i]->coef * -1) << " * X^" << equationList[i]->exp;
 		else
@@ -205,7 +209,7 @@ void	Poly::printReducedForm()
 	std::cout << " = 0\n";
 }
 
-int	Poly::printPolynomialDegree()
+int		Poly::printPolynomialDegree()
 {
 	for (int i = equationList.size() - 1; i >= 0; i--)
 	{
@@ -252,20 +256,8 @@ void	Poly::printFirstDegree()
 {
 	float	a = 0.0;
 	float	b = 0.0;
-	switch (equationList.size())
-	{
-		case 1:
-			a = equationList[0]->coef;
-			break ;
-		case 2:
-			a = equationList[1]->coef;
-			b = equationList[0]->coef;
-			break ;
-		case 3:
-			a = equationList[2]->coef;
-			b = equationList[1]->coef;
-			break ;
-	}
+	a = equationList[1]->coef;
+	b = equationList[0]->coef;
 	RC1 = (b * -1) / a;
 	std::cout << "The solution is:\n";
 	std::cout << RC1 << std::endl;
@@ -274,8 +266,6 @@ void	Poly::printFirstDegree()
 void	Poly::comput()
 {
 	int		degree;
-	for (size_t i = 0; i < resultList.size(); i++)
-		equationList[i]->coef -= resultList[i]->coef;
 	printReducedForm();
 	degree = printPolynomialDegree();
 	if (degree > 1)

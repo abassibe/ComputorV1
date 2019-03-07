@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   computor.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 17:29:15 by abassibe          #+#    #+#             */
-/*   Updated: 2019/03/05 18:26:44 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/03/07 17:13:58 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Poly.hpp"
-#include "Monome.hpp"
+#include "../includes/Poly.hpp"
+#include "../includes/Monome.hpp"
 
 static void		error(std::string error)
 {
