@@ -6,7 +6,7 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 16:16:12 by abassibe          #+#    #+#             */
-/*   Updated: 2019/03/07 17:14:08 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/03/08 17:11:52 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ Monome::Monome(std::string monome)
 		}
 		if ((tempCoef[i] < '0' || tempCoef[i] > '9') && tempCoef[i] != '.')
 		{
-			coef = std::stof(tempCoef.substr(i + 1));
+			coef = std::stof(tempCoef.substr(i));
 			if ((tempCoef[i] == '-') || (i > 0 && tempCoef[i - 1] == '-'))
 				coef *= -1;
 			break;

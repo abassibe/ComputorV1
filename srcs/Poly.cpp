@@ -6,7 +6,7 @@
 /*   By: abassibe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 17:46:29 by abassibe          #+#    #+#             */
-/*   Updated: 2019/03/07 17:14:21 by abassibe         ###   ########.fr       */
+/*   Updated: 2019/03/08 17:14:47 by abassibe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,20 +105,8 @@ void	Poly::deltaEqualZero()
 {
 	float	a = 0.0;
 	float	b = 0.0;
-	switch (equationList.size())
-	{
-		case 1:
-			a = equationList[0]->coef;
-			break ;
-		case 2:
-			a = equationList[1]->coef;
-			b = equationList[0]->coef;
-			break ;
-		case 3:
-			a = equationList[2]->coef;
-			b = equationList[1]->coef;
-			break ;
-	}
+	a = equationList[2]->coef;
+	b = equationList[1]->coef;
 	RC1 = (b * -1) / (2 * a);
 }
 
@@ -139,20 +127,8 @@ void	Poly::deltaSupZero()
 {
 	float	a = 0.0;
 	float	b = 0.0;
-	switch (equationList.size())
-	{
-		case 1:
-			a = equationList[0]->coef;
-			break ;
-		case 2:
-			a = equationList[1]->coef;
-			b = equationList[0]->coef;
-			break ;
-		case 3:
-			a = equationList[2]->coef;
-			b = equationList[1]->coef;
-			break ;
-	}
+	a = equationList[2]->coef;
+	b = equationList[1]->coef;
 	RC1 = ((b * -1) + squareRoot(delta)) / (2 * a);
 	RC2 = ((b * -1) - squareRoot(delta)) / (2 * a);
 }
@@ -182,6 +158,7 @@ void	Poly::printReducedForm()
 	{
 		equationList.push_back(resultList.back());
 		resultList.pop_back();
+		equationList.back()->coef *= -1;
 	}
 	for (size_t i = 0; i < resultList.size(); i++)
 		equationList[i]->coef -= resultList[i]->coef;
@@ -273,8 +250,5 @@ void	Poly::comput()
 	else if (degree == 1)
 		printFirstDegree();
 	else
-	{
-		std::cout << "The solution is:\n";
-		std::cout << "0" << std::endl;
-	}
+		std::cout << "There is no solution.\n";
 }
